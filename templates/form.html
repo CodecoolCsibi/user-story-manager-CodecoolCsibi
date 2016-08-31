@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<HTML class=data >
+<HEAD>
+    <TITLE>{{ data[0]['title'] }}</TITLE>
+</HEAD>
+<BODY >
+<H1>{{ data[0]['header'] }}</H1>
+{% if data[0]['fill'] %}
+    <FORM action={{data[0]['url']}} method="post" >
+        <fieldset>
+
+        <p>Story title</p>
+        <P><input type="text" name="title"></P>
+
+        <p>User story</p>
+        <P><input type="text" name="userstory"></P>
+
+        <P>Acceptance Criteria</P>
+    <P><textarea id="Acceptance Criteria" rows="15" cols="60" name="acccrit"></textarea></P>
+            <p>Business value</p>
+            <input type="number" step="100" name="bisval" min="0" max="1500"  width="30">
+            <p>Estimation</p>
+            <input type="number" step="0.5" name="estimation" min="0" max="40"  width="30">
+
+        <p>Status</p>
+        <select name="status">
+            <option value="Planning">Planning</option>
+            <option value="To do">To do</option>
+            <option value="In progress">In progress</option>
+            <option value="Review">Review</option>
+            <option value="Done">Done</option>
+        </select>
+
+    <P><input type="submit" value='Create'></P>
+            </fieldset>
+    </FORM>
+{% else %}
+    <FORM action={{data[0]['url']}} method="post" >
+        <fieldset>
+
+        <p>Story title</p>
+        <P><input type="text" name="title" value={{data[1].story_title}} ></P>
+
+        <p>User story</p>
+        <P><input type="text" name="userstory" value={{data[1].story_title}}></P>
+
+        <P>Acceptance Criteria</P>
+    <P><textarea  rows="15" cols="60" name="acccrit">{{data[1].acceptance_criteria}}</textarea></P>
+            <p>Business value</p>
+            <input type="number" step="100" name="bisval" min="0" max="1500"  width="30" value={{data[1].business_value}}>
+            <p>Estimation</p>
+            <input type="number" step="0.5" name="estimation" min="0" max="40"  width="30" value={{data[1].estimation}}>
+
+        <p>Status</p>
+        <select name="status">
+            <option selected disabled hidden>{{data[1].status}}</option>
+            <option value="Planning">Planning</option>
+            <option value="To do">To do</option>
+            <option value="In progress">In progress</option>
+            <option value="Review">Review</option>
+            <option value="Done">Done</option>
+        </select>
+
+    <P><input type="submit" value={{data[0]['submit']}}></P>
+            </fieldset>
+    </FORM>
+{% endif %}
+
+</BODY>
+
+</HTML>
