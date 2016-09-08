@@ -8,14 +8,28 @@ app = Flask('User Story Manager')
 @app.before_first_request
 def connect_db():
     db.connect()
-    db.drop_tables(Story, safe=True)
+    db.drop_table(Story, fail_silently=True)
     db.create_table(Story, safe=True)
     Story.create(
-        story_title='Test',
-        user_story='Testing the database',
+        story_title='Test1',
+        user_story='Testing the database312',
         acceptance_criteria='If I see this story, it is good :D',
-        business_value=99999,
-        estimation=99999
+        business_value=200,
+        estimation=3
+    )
+    Story.create(
+        story_title='Test2',
+        user_story='Testing the databa123se',
+        acceptance_criteria='If I see this321 story, it is good :D',
+        business_value=100,
+        estimation=4
+    )
+    Story.create(
+        story_title='Test3',
+        user_story='Testing the database',
+        acceptance_criteria='If I see thi3123s story, it is good :D',
+        business_value=300,
+        estimation=5
     )
 
 
@@ -48,14 +62,6 @@ def fill_forms():
 
 @app.route('/story', methods=['POST'])
 def create_story():
-    filling_values = {
-        'Fill': True,
-        'title': 'Add Story',
-        'header': 'User Story Manager  - Add new Story',
-        'submit': 'Create',
-        'message': 'Invalid data,please try again!',
-        'story': 'create_story',
-        'url': '/save_story'}
     story = Story.create(
         story_title=request.form['title'],
         user_story=request.form['userstory'],
@@ -64,11 +70,8 @@ def create_story():
         estimation=request.form['estimation'],
         status=request.form['status']
     )
-    if story.check_if_valid():
-        story.save()
-        return redirect('/list')
-    else:
-        return render_template('form.html', data=[filling_values])
+    story.save()
+    return redirect('/list')
 
 
 @app.route('/story/<story_id>')
@@ -88,15 +91,24 @@ def show_by_id(story_id):
 
 @app.route('/story/<story_id>', methods=['POST'])
 def edit_story(story_id):
+    print('edit_storyba belépve')
     story = Story.select().where(Story.story_id == story_id).get()
+    print('query succesful')
     story.story_title = request.form['title']
+    print('title updated')
     story.user_story = request.form['userstory']
+    print('user_story updated')
     story.acceptance_criteria = request.form['acccrit']
+    print('acceptance_criteria updated')
     story.business_value = request.form['bisval']
+    print('business_value updated')
     story.estimation = request.form['estimation']
+    print('estimation updated')
+    print('status:', request.form['status'])
     story.status = request.form['status']
-    if story.check_if_valid():
-        story.save()
+    print('status updated')
+    story.save()
+    print('Saved')
     return redirect(url_for('list_stories'))
 
 
