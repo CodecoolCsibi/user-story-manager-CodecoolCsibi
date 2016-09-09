@@ -14,9 +14,9 @@
             <th>Story title</th>
             <th>User story</th>
             <th>Acceptance criteria</th>
-            <th>Business value</th>
-            <th>Estimation</th>
-            <th>Status</th>
+            <th data-toggle="tooltip" title="measures the importance of the story for the client">Business value</th>
+            <th data-toggle="tooltip" title="estimated implemention time in hours">Estimation</th>
+            <th data-toggle="tooltip" title="story process status">Status</th>
         </tr>
 
 {% for story in stories %}
@@ -31,8 +31,10 @@
                 <td>{{story.estimation}}</td>
                 <td>{{story.status}}</td>
                 <td >
-                    <a href='/story/{{story.story_id}}'><input type="image"  src="../static/edit_button.png" width="20px" height="20px"></a>
-                    <a href='/delete/{{story.story_id}}'><input type="image" src="../static/delete_button.png" width="20px" height="20px"></a>
+                    <a href='/story/{{story.story_id}}'><input type="image"  src="../static/edit_button.png" width="20px"
+                                                               height="20px" data-toggle="tooltip" title="edit this story"></a>
+                    <a href='/delete/{{story.story_id}}'><input type="image" src="../static/delete_button.png" width="20px"
+                                                                height="20px" data-toggle="tooltip" title="delete this story"></a>
                 </td>
                 {% endfor %}
 
