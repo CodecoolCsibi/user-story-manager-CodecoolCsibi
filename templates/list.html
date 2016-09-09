@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <head>
     <title>Story list</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-<H1>User stories</H1>
+    <h1>User stories</h1>
 
-<TABLE class=stories >
-    <tr><th>story_id</th>
-    <th>Story title</th>
-    <th>User story</th>
-    <th>Acceptance criteria</th>
-    <th>Business value</th>
-    <th>Estimation</th>
-    <th>Status</th></tr>
-    {% for story in stories %}
-  <TR>
-    <TD>{{story.story_id}}</TD>
-    <TD>{{story.story_title}}</TD>
-    <TD>{{story.user_story}}</TD>
-    <TD>{{story.acceptance_criteria}}</TD>
-    <TD>{{story.business_value}}</TD>
-    <TD>{{story.estimation}}</TD>
-    <TD>{{story.status}}</TD>
-    <td><a href='/story/{{story.story_id}}'><input type="button"  value="Edit"></a></td>
-      <form action=/delete/{{story.story_id}} method="post">
-        <td><input type="submit"  value="Delete"></td>
-    </form>
-  </TR>
-    {% endfor %}
-    <td><a href='/story'><input type="button"  value="Create New"></a></td>
+    <table>
+      <tr>
+        <th>story_id</th>
+        <th>Story title</th>
+        <th>User story</th>
+        <th>Acceptance criteria</th>
+        <th>Business value</th>
+        <th>Estimation</th>
+        <th>Status</th>
+      </tr>
 
-</table>
+        {% for story in stories %}
+      <tr>
+        <td>{{story.story_id}}</td>
+        <td>{{story.story_title}}</td>
+        <td>{{story.user_story}}</td>
+        <td>{{story.acceptance_criteria}}</td>
+        <td>{{story.business_value}}</td>
+        <td>{{story.estimation}}</td>
+        <td>{{story.status}}</td>
+        <td class="listbuttons">
+            <a href='/story/{{story.story_id}}'><input type="image"  src="../static/edit_button.png" width="20px" height="20px"></a></td>
+        <td class="listbuttons">
+            <a href='/delete/{{story.story_id}}'><input type="image" src="../static/delete_button.png" width="20px" height="20px"></a></td>
+      </tr>
+        {% endfor %}
+    </table>
+        <a class="create" href='/story'>Create New</a>
 </body>

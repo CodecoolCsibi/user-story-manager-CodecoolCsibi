@@ -43,7 +43,10 @@ def list_stories():
     stories = Story.select()
     for story in stories:
         story_list.append(story)
-    return render_template('list.html', stories=story_list)
+    data = [{
+        'title': 'Story List',
+        }]
+    return render_template('bootstrap_list.html', data=data, stories=story_list)
 
 
 @app.route('/story', methods=['GET'])
@@ -57,7 +60,7 @@ def fill_forms():
         'story': 'create_story',
         'url': '/story'
     }
-    return render_template('form.html', data=[filling_values])
+    return render_template('bootstrap_form.html', data=[filling_values])
 
 
 @app.route('/story', methods=['POST'])
@@ -86,7 +89,7 @@ def show_by_id(story_id):
         'url': '/story/' + str(story.story_id)
     }
 
-    return render_template('form.html', data=[filling_values, story])
+    return render_template('bootstrap_form.html', data=[filling_values, story])
 
 
 @app.route('/story/<story_id>', methods=['POST'])
@@ -102,7 +105,7 @@ def edit_story(story_id):
     return redirect(url_for('list_stories'))
 
 
-@app.route('/delete/<story_id>', methods=['POST'])
+@app.route('/delete/<story_id>', methods=['POST', 'GET'])
 def delete_story(story_id):
     story = Story.select().where(Story.story_id == story_id).get()
     story.delete_instance()

@@ -2,7 +2,7 @@
 <HTML class=data >
 <HEAD>
     <TITLE>{{ data[0]['title'] }}</TITLE>
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
 </HEAD>
 <BODY >
 <H1>{{ data[0]['header'] }}</H1>
@@ -10,11 +10,13 @@
     <FORM action={{data[0]['url']}} method="post" >
         <fieldset>
 
-        <label for="storytitle">Story title</label>
-        <P><input id="storytitle" type="text" name="title" required="required"></P>
+        <label
+                for="storytitle">Story title
+        </label>
+            <P><input id="storytitle" type="text" name="title" required="required"></P>
 
         <label for="userstory">User story</label>
-        <P><input id="userstory" type="text" name="userstory" required="required"></P>
+            <P><input id="userstory" type="textarea" rows="15" cols="60" name="userstory" required="required"></P>
 
         <label for="ac">Acceptance Criteria</label>
     <P><textarea id="ac" rows="15" cols="60" name="acccrit" required="required"></textarea></P>
@@ -40,13 +42,13 @@
         <fieldset>
 
         <label for="title">Story title</label>
-        <P><input id="title" type="text" name="title" value={{data[1].story_title}} required="required" ></P>
+        <P><input id="title" type="text" name="title" value="{{data[1].story_title}}" required="required" ></P>
 
         <label for="us">User story</label>
         <P><textarea id="us" type="text" rows="15" cols="60" name="userstory" required="required" >{{data[1].user_story}}</textarea></P>
 
-        <label for="accrit">Acceptance Criteria</>
-    <P><textarea id="accrit" rows="15" cols="60" name="acccrit">{{data[1].acceptance_criteria}} required="required"</textarea></P>
+        <label for="accrit">Acceptance Criteria</label>
+    <P><textarea id="accrit" rows="15" cols="60" name="acccrit" required="required">{{data[1].acceptance_criteria}}</textarea></P>
             <p>Business value</p>
             <input type="number" step="100" name="bisval" min="0" max="1500"  width="30" value={{data[1].business_value}} >
             <p>Estimation</p>

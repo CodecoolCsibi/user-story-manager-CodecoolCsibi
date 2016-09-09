@@ -1,0 +1,82 @@
+{% extends "navbar.html" %}
+{% block title %}{{data[0]['title']}}{% endblock %}
+<body>
+    {% block body %}
+    {{ super() }}
+    <div class="page-header">
+        <h1>{{data[0]['header']}}</h1>
+    </div>
+
+    <form action={{data[0]['url']}} method="post" class="form-vertical">
+    {% if data[0]['fill'] %}
+        <div class="form-group">
+            <label for="ST">Story Title</label>
+            <input id="ST" type="text" class="form-control input-normal" name="title" required="required">
+        </div>
+        <div class="form-group">
+            <label for="US">User Story</label>
+            <textarea id="US" class="form-control" name="userstory" required="required"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="AC">Acceptance Criteria</label>
+            <textarea id="AC" class="form-control" name="acccrit" required="required"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="BV">Business Value</label>
+            <input id="BV" type="number" step="100" min="0" max="1500" class="form-control" name="bisval" required="required">
+        </div>
+        <div class="form-group">
+            <label for="EST">Estimation</label>
+            <input id="EST" type="number" step="0.5" min="0.5" max="40" class="form-control" name="estimation" required="required">
+        </div>
+        <div class="form-group">
+            <span class="input-group-addon">Status:</span>
+            <select id="STAT" class="form-control" name="status">
+                <option value="Planning">Planning</option>
+                <option value="To do">To do</option>
+                <option value="In progress">In progress</option>
+                <option value="Review">Review</option>
+                <option value="Done">Done</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-default">Create</button>
+    </form>
+    {% else %}
+
+        <div class="form-group">
+            <label for="STI">Story Title</label>
+            <input id="STI" type="text" class="form-control" name="title"  required="required" value="{{data[1].story_title}}">
+        </div>
+        <div class="form-group">
+            <label for="UST">User Story</label>
+            <textarea id="UST" class="form-control" name="userstory" required="required">{{data[1].user_story}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="ACR">Acceptance Criteria</label>
+            <textarea id="ACR" class="form-control" name="acccrit" required="required">{{data[1].acceptance_criteria}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="BVA">Business Value</label>
+            <input id="BVA" type="number" step="100" min="0" max="1500" class="form-control" name="bisval" value="{{data[1].business_value}}" required="required">
+        </div>
+        <div class="form-group">
+            <label for="ESTI">Estimation</label>
+            <input id="ESTI" type="number" step="0.5" min="0.5" max="40" class="form-control" name="estimation" value="{{data[1].estimation}}" required="required">
+        </div>
+        <div class="form-group">
+            <span class="input-group-addon">Status:</span>
+            <select id="STATUS" class="form-control" name="status">
+                <option selected  hidden>{{data[1].status}}</option>
+                <option value="Planning">Planning</option>
+                <option value="To do">To do</option>
+                <option value="In progress">In progress</option>
+                <option value="Review">Review</option>
+                <option value="Done">Done</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-warning">Save</button>
+    {% endif %}
+    </form>
+{% endblock %}
+</body>
+</html>

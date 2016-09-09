@@ -1,0 +1,43 @@
+{% extends "navbar.html" %}
+{% block title %}Story List{% endblock %}
+<body>
+{% block body %}
+{{ super() }}
+<div class="page-header">
+        <h1>Story List</h1>
+    </div>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Story title</th>
+            <th>User story</th>
+            <th>Acceptance criteria</th>
+            <th>Business value</th>
+            <th>Estimation</th>
+            <th>Status</th>
+        </tr>
+
+{% for story in stories %}
+
+        <tr>
+
+                <td>{{story.story_id}}</td>
+                <td>{{story.story_title}}</td>
+                <td>{{story.user_story}}</td>
+                <td>{{story.acceptance_criteria}}</td>
+                <td>{{story.business_value}}</td>
+                <td>{{story.estimation}}</td>
+                <td>{{story.status}}</td>
+                <td >
+                    <a href='/story/{{story.story_id}}'><input type="image"  src="../static/edit_button.png" width="20px" height="20px"></a>
+                    <a href='/delete/{{story.story_id}}'><input type="image" src="../static/delete_button.png" width="20px" height="20px"></a>
+                </td>
+                {% endfor %}
+
+    </table>
+        <a href="{{url_for('fill_forms')}}"><input type="submit" class="btn btn-lg btn-primary" value="Create New"></a>
+</div>
+{% endblock %}
+</body>
