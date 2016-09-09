@@ -91,24 +91,14 @@ def show_by_id(story_id):
 
 @app.route('/story/<story_id>', methods=['POST'])
 def edit_story(story_id):
-    print('edit_storyba belépve')
     story = Story.select().where(Story.story_id == story_id).get()
-    print('query succesful')
     story.story_title = request.form['title']
-    print('title updated')
     story.user_story = request.form['userstory']
-    print('user_story updated')
     story.acceptance_criteria = request.form['acccrit']
-    print('acceptance_criteria updated')
     story.business_value = request.form['bisval']
-    print('business_value updated')
     story.estimation = request.form['estimation']
-    print('estimation updated')
-    print('status:', request.form['status'])
     story.status = request.form['status']
-    print('status updated')
     story.save()
-    print('Saved')
     return redirect(url_for('list_stories'))
 
 
@@ -117,7 +107,6 @@ def delete_story(story_id):
     story = Story.select().where(Story.story_id == story_id).get()
     story.delete_instance()
     story.save()
-    print('volt valami csak szar')
     return redirect(url_for('list_stories'))
 
 

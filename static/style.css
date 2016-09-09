@@ -1,0 +1,24 @@
+h1{
+    color: aliceblue;
+}
+body {
+    background-color: #ccc;
+    margin: 20px;
+    padding: 40px;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 14px;
+    color: orangered;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+a {
+    text-decoration: none;
+}
+
+strong {
+    font-style: italic;
+    text-transform: uppercase;
+}
